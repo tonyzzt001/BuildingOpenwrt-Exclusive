@@ -26,7 +26,7 @@ curl -fsSL  https://raw.githubusercontent.com/firkerword/KPR/main/cus_config.yam
 sed -i 's/bootstrap/argon-18.06/g' ./feeds/luci/collections/luci/Makefile
 
 rm -rf ./feeds/luci/themes/luci-theme-argon
-rm -rf ./feeds/luci/applications/luci-app-wrtbwmon
+# rm -rf ./feeds/luci/applications/luci-app-wrtbwmon
 rm -rf ./feeds/packages/net/adguardhome
 # rm -rf ./feeds/packages/net/smartdns
 # rm -rf ./feeds/luci/applications/luci-app-mosdns
