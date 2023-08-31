@@ -160,10 +160,9 @@ jobs:
       run: |
         echo "release_tag=${{ env.TAG_TIME }}" >> $GITHUB_OUTPUT
         touch release.txt
+        echo "TZ-OpenWRT" >> release.txt
         echo "功能介绍：Openclash、Passwall、Zerotier、Adguardhome、Aliddns。" >> release.txt
         echo "[固件源码](https://github.com/coolsnowwolf/lede)" >> release.txt
-        echo "由衷感谢所有为openwrt无私奉献的大佬们" >> release.txt
-        echo "📥 固件下载" >> release.txt
         echo "status=success" >> $GITHUB_OUTPUT
     - name: 发布至release
       uses: softprops/action-gh-release@v1
