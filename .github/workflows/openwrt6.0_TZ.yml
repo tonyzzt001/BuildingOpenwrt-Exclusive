@@ -154,6 +154,23 @@ jobs:
         name: OpenWrt_6.0${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
 
+								   
+					 
+																										
+			
+											
+																									
+																				  
+																						
+								   
+					
+																									   
+			
+											
+																				   
+																				
+																					   
+		
     - name: 创建release标签
       id: tag
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
@@ -163,6 +180,10 @@ jobs:
         echo "TZ-OpenWRT" >> release.txt
         echo "功能介绍：Openclash、Passwall、Zerotier、Adguardhome、Aliddns。" >> release.txt
         echo "[固件源码](https://github.com/coolsnowwolf/lede)" >> release.txt
+																				  
+											   
+																														   
+																														 
         echo "status=success" >> $GITHUB_OUTPUT
     - name: 发布至release
       uses: softprops/action-gh-release@v1
@@ -188,4 +209,4 @@ jobs:
         keep_latest: 9
         delete_tags: true
       env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}																																																																																															   
