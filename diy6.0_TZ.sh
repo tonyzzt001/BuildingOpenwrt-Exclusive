@@ -31,7 +31,8 @@ svn co https://github.com/linkease/istore/trunk/luci/luci-app-store package/luci
 # git clone https://github.com/sbwml/openwrt-alist.git package/openwrt-alist
 # svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-bypass package/luci-app-bypass
 # git clone https://github.com/fw876/helloworld.git package/ssr
-# git clone https://github.com/firker/diy-ziyong.git package/diy-ziyong
+git clone https://github.com/tonyzzt001/luci-app-aliddns.git openwrt/luci-app-aliddns
+git clone https://github.com/firker/diy-ziyong.git package/diy-ziyong
 git clone https://github.com/xiaorouji/openwrt-passwall package/openwrt-passwall
 # git clone -b lede https://github.com/pymumu/luci-app-smartdns.git package/luci-app-smartdns
 # git clone https://github.com/immortalwrt/homeproxy.git package/luci-app-homeproxy
