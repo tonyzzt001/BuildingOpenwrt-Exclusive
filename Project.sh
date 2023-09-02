@@ -36,6 +36,6 @@ svn co https://github.com/linkease/istore-ui/trunk/app-store-ui package/app-stor
 # svn co https://github.com/linkease/openwrt-themedog/trunk/luci/luci-theme-dog package/luci-theme-dog
 # svn co https://github.com/messense/aliyundrive-webdav/trunk/openwrt package/aliyundrive-webdav
 svn co https://github.com/kiddin9/openwrt-packages/trunk/adguardhome package/adguardhome
-svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-adguardhome package/luci-app-adguardhome
-svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash package/luci-app-openclash
+# svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-adguardhome package/luci-app-adguardhome
+# svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash package/luci-app-openclash
 svn co https://github.com/tonyzzt001/luci-app-aliddns openwrt/luci-app-aliddns
