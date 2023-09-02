@@ -15,6 +15,11 @@ sed -i 's/KERNEL_PATCHVER:=5.15/KERNEL_PATCHVER:=6.1/g' ./target/linux/x86/Makef
 # sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
 
 # Add a feed source
+git clone https://github.com/firker/diy-ziyong.git package/diy-ziyong
+git clone https://github.com/xiaorouji/openwrt-passwall package/openwrt-passwall
+git clone -b luci https://github.com/xiaorouji/openwrt-passwall package/luci-app-passwall
+svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash package/luci-app-openclash
+git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git  package/luci-theme-argon-18.06
 # sed -i '$a src-git lienol https://github.com/Lienol/openwrt-package' feeds.conf.default
 # sed -i '$a src-git jerryk https://github.com/jerrykuku/openwrt-package' feeds.conf.default
 # sed -i '$a src-git bypass https://github.com/garypang13/openwrt-bypass' feeds.conf.default
@@ -22,11 +27,6 @@ sed -i 's/KERNEL_PATCHVER:=5.15/KERNEL_PATCHVER:=6.1/g' ./target/linux/x86/Makef
 # git clone https://github.com/vernesong/OpenClash.git package/OpenClash
 # git clone https://github.com/jerrykuku/luci-app-vssr.git  package/luci-app-vssr
 # svn co https://github.com/messense/aliyundrive-webdav/trunk/openwrt package/aliyundrive-webdav
-svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash package/luci-app-openclash
-git clone https://github.com/firker/diy-ziyong.git package/diy-ziyong
-git clone https://github.com/xiaorouji/openwrt-passwall package/openwrt-passwall
-git clone -b luci https://github.com/xiaorouji/openwrt-passwall package/luci-app-passwall
-git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git  package/luci-theme-argon-18.06
 # svn co https://github.com/linkease/istore/trunk/luci/luci-app-store package/luci-app-store
 # svn co https://github.com/linkease/istore/trunk/luci/luci-app-store package/luci-app-store
 # svn co https://github.com/linkease/istore-ui/trunk/app-store-ui package/app-store-ui
