@@ -109,6 +109,11 @@ jobs:
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
+
+    - name: 安装阿里DDNS
+      run: |
+       cd openwrt/package 
+       git clone https://github.com/tonyzzt001/luci-app-aliddns.git
     - name: 开始编译固件
       id: compile
       run: |
