@@ -161,7 +161,7 @@ jobs:
         echo "release_tag=${{ env.TAG_TIME }}" >> $GITHUB_OUTPUT
         touch release.txt
         echo "TZ-OpenWRT" >> release.txt
-        echo "Luci-Apps：Openclash、Passwall、Zerotier、Adguardhome、Aliddns。" >> release.txt
+        echo "Luci-Apps：Openclash、Passwall、Zerotier、Adguardhome。" >> release.txt
         echo "status=success" >> $GITHUB_OUTPUT
     - name: 发布至release
       uses: softprops/action-gh-release@v1
