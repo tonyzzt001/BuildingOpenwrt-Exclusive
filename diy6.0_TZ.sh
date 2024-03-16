@@ -40,3 +40,6 @@ git clone -b 18.06 https://github.com/garypang13/luci-theme-edge.git package/luc
 find ./ | grep Makefile | grep v2ray-geodata | xargs rm -f
 find ./ | grep Makefile | grep mosdns | xargs rm -f
 git clone https://github.com/sbwml/luci-app-mosdns -b v5 package/mosdns
+git clone https://github.com/udhos/update-golang
+cd update-golang
+sudo ./update-golang.sh
