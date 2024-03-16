@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: OpenWrt-lede6.6
+name: TZ-WRT_x86_6.0
 
 on:
   repository_dispatch:
@@ -16,16 +16,16 @@ on:
         description: 'SSH connection to Actions'
         required: false
         default: 'false'
-  schedule:
-    - cron: 0 18 */5 * *
+  # schedule:
+  #   - cron: 0 21 1 * *
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: 6.0.config
-  DIY_P1_SH: diy6.0.sh
-  DIY_P2_SH: diy.sh
+  CONFIG_FILE: TZ-WRT_x86_6.0.config
+  DIY_P1_SH: diy6.0_TZ.sh
+  DIY_P2_SH: diy_TZ.sh
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
@@ -46,7 +46,7 @@ jobs:
         df -hT
         echo "=============================================================================="
 
-    - name: "Optimize Disk Space"
+    - name: "优化磁盘空间"
       uses: "hugoalh/disk-space-optimizer-ghaction@v0.8.0"
       with:
         operate_sudo: "True"
@@ -67,7 +67,7 @@ jobs:
         npm_clean: "True"
         os_swap: "True"
 
-    - name: Freeing up disk space
+    - name: 释放磁盘空间
       uses: easimon/maximize-build-space@master
       with: 
         root-reserve-mb: 2048
@@ -86,6 +86,17 @@ jobs:
         echo "=============================================================================="
     - name: 检查项目分支
       uses: actions/checkout@main
+
+    - name: 清理磁盘空间
+      uses: jlumbroso/free-disk-space@main
+      with:
+        tool-cache: false
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
 
     - name: 安装编译环境
       env:
@@ -189,23 +200,6 @@ jobs:
         name: OpenWrt_6.6${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
 
-    - name: 上传固件到NN网盘
-      id: cowtransfer
-      if: steps.organize.outputs.status == 'success' && env.UPLOAD_COWTRANSFER == 'true' && !cancelled()
-      run: |
-        curl -fsSL git.io/file-transfer | sh
-        ./transfer cow --block 2621440 -s -p 64 --no-progress ${FIRMWARE} 2>&1 | tee cowtransfer.log
-        echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
-        echo "url=$(cat cowtransfer.log | grep https | cut -f3 -d" ")" >> $GITHUB_OUTPUT
-    - name: 上传固件到WT网盘
-      id: wetransfer
-      if: steps.organize.outputs.status == 'success' && env.UPLOAD_WETRANSFER == 'true' && !cancelled()
-      run: |
-        curl -fsSL git.io/file-transfer | sh
-        ./transfer wet -s -p 16 --no-progress ${FIRMWARE} 2>&1 | tee wetransfer.log
-        echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
-        echo "url=$(cat wetransfer.log | grep https | cut -f3 -d" ")" >> $GITHUB_OUTPUT
-        
     - name: 发布至release
       id: release
       uses: ncipollo/release-action@v1
@@ -217,18 +211,14 @@ jobs:
         commit: main
         token: ${{ secrets.RELEASE_TOKEN }}
         body: |
-          功能介绍：IPV6、Dockerman、定时重拨、Passwall、Openvpn、mosdns等。
-          [固件源码](https://github.com/coolsnowwolf/lede)
-          由衷感谢所有为openwrt无私奉献的大佬们
-          📥 固件下载
-          🔗 [国外WT网盘](${{ steps.wetransfer.outputs.url }})
+          功能介绍：Luci-Apps：Openclash、Passwall、Zerotier、Adguardhome、Aliddns、MosDNS等。
         artifacts: ${{ env.FIRMWARE }}/*
         
     - name: 清理旧的workflow
       uses: FunctionXJB/delete-workflow-runs@main
       with:
-        retain_days: 180
-        keep_minimum_runs: 10
+        retain_days: 3
+        keep_minimum_runs: 6
 
     - name: 删除旧的Releases
       uses: dev-drprasad/delete-older-releases@v0.3.2
@@ -238,6 +228,3 @@ jobs:
         delete_tags: true
       env:
         GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-
-    - name: TG推送
-      run: curl "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}&text=🅱️恭喜主人X86-openwrt6.6-1806版固件编译完成！🎉%0A⏰编译时间：${{ env.DATE }}%0A📥下载地址：https://github.com/firker/openwrt-Exclusive/releases/tag/${{ env.TAG_TIME }}%0A🌐WT网盘：${{ steps.wetransfer.outputs.url }}"
